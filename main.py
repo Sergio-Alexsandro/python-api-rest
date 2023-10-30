@@ -14,7 +14,7 @@ cursor = db.cursor()
 
 
 # Rota para criar um novo aluno
-@app.route('/alunos', methods=['POST'])
+@app.route('/alunos/post', methods=['POST'])
 def criar_aluno():
     dados_aluno = request.json
     nome_aluno = dados_aluno['nome_aluno']
@@ -33,7 +33,7 @@ def criar_aluno():
 
 
 # Rota para listar todos os alunos
-@app.route('/alunos', methods=['GET'])
+@app.route('/alunos/get', methods=['GET'])
 def listar_alunos():
     cursor.execute("SELECT * FROM alunos")
     alunos = cursor.fetchall()
@@ -54,7 +54,7 @@ def listar_alunos():
 
 
 # Rota para atualizar um aluno por ID
-@app.route('/alunos/<int:aluno_id>', methods=['PUT'])
+@app.route('/alunos/put/<int:aluno_id>', methods=['PUT'])
 def atualizar_aluno(aluno_id):
     dados_aluno = request.json
 
@@ -79,7 +79,7 @@ def atualizar_aluno(aluno_id):
 
 
 # Rota para excluir um aluno por ID
-@app.route('/alunos/<int:aluno_id>', methods=['DELETE'])
+@app.route('/alunos/delete/<int:aluno_id>', methods=['DELETE'])
 def excluir_aluno(aluno_id):
     cursor.execute("SELECT * FROM alunos WHERE id = %s", (aluno_id,))
     aluno = cursor.fetchone()
